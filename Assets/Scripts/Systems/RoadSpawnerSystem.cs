@@ -9,31 +9,6 @@ using Unity.Transforms;
 [UpdateInGroup(typeof(SimulationSystemGroup))]
 public class RoadSpawnerSystem : JobComponentSystem
 {
-    /*
-    protected override void OnUpdate()
-    {
-        var commandBuffer = m_EntityCommandBufferSystem.CreateCommandBuffer().ToConcurrent();
-
-        Entities
-             .WithName("RoadSpawnerSystem")
-             .WithBurst(FloatMode.Default, FloatPrecision.Standard, true)
-             .ForEach((Entity entity, int entityInQueryIndex, in RoadSpawner roadSpawner, in LocalToWorld location) =>
-             {
-                 for (var z = 0; z < roadSpawner.Length; z++)
-                 {
-                     var instance = commandBuffer.Instantiate(entityInQueryIndex, roadSpawner.Prefab);
-                     var position = new float3(0, 0, z * 5);
-
-                     commandBuffer.SetComponent(entityInQueryIndex, instance, new Translation { Value = position });
-                 }
-
-                 commandBuffer.DestroyEntity(entityInQueryIndex, entity);
-             }).ScheduleParallel();
-
-        m_EntityCommandBufferSystem.AddJobHandleForProducer(Dependency);
-    }
-    */
-
     [BurstCompile]
     struct SetComponentDataJob : IJobParallelFor
     {
