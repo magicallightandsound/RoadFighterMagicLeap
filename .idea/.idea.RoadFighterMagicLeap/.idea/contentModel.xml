@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="Authoring" t="Include">
+            <e p="Car_Authoring.cs" t="Include" />
+            <e p="Trees_Authoring.cs" t="Include" />
+          </e>
+          <e p="Behaviors" t="Include">
+            <e p="Tests" t="Include">
+              <e p="ClippingShader.cs" t="Include" />
+              <e p="ClippingShaderMultiplePlanes.cs" t="Include" />
+              <e p="SinMovement.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Components" t="Include">
+            <e p="Dynamic buffers" t="Include">
+              <e p="TreeBuffer.cs" t="Include" />
+            </e>
+            <e p="InputData.cs" t="Include" />
+            <e p="MovementSpeed.cs" t="Include" />
+            <e p="ObstacleSpawner.cs" t="Include" />
+            <e p="RoadSpawner.cs" t="Include" />
+            <e p="RotationSpeed.cs" t="Include" />
+            <e p="Tags" t="Include">
+              <e p="PlayerTag.cs" t="Include" />
+              <e p="RoadTag.cs" t="Include" />
+              <e p="TreesSpawner.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Systems" t="Include">
+            <e p="ObstaclesSpawnerSystem.cs" t="Include" />
+            <e p="PlayerInputSystem.cs" t="Include" />
+            <e p="PlayerMovementSystem.cs" t="Include" />
+            <e p="PropsMovementSystem.cs" t="Include" />
+            <e p="RestrictPlayerMovementSystem.cs" t="Include" />
+            <e p="RoadSpawnerSystem.cs" t="Include" />
+            <e p="TreesSpawnerSystem.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Settings" t="Include">
+          <e p="Input" t="Include">
+            <e p="PlayerControls.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="RoadFighterMagicLeap.sln" t="IncludeFlat" />
+      <e p="Temp/bin" t="ExcludeRecursive" />
+    </e>
+    <e p="$USER_HOME$/Library/Caches/Rider2019.3/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2019.3/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_RoadFighterMagicLeap.1002826957.00" t="ExcludeRecursive" />
+  </component>
+</project>

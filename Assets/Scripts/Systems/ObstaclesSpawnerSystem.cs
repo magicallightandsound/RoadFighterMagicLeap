@@ -1,7 +1,9 @@
-﻿using Unity.Entities;
+﻿using System;
+using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
+using Random = Unity.Mathematics.Random;
 
 public class ObstaclesSpawnerSystem : JobComponentSystem
 {
@@ -19,9 +21,12 @@ public class ObstaclesSpawnerSystem : JobComponentSystem
 
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
+        // Non-deterministic Random Number Generation
         float dt = Time.DeltaTime;
         Random rnd = new Random();
-        rnd.InitState((uint)(dt * 100000));
+        rnd.InitState();
+        
+        uint systemVersion = LastSystemVersion;
 
         if (m_timeToInstance > 0)
         {
@@ -37,12 +42,18 @@ public class ObstaclesSpawnerSystem : JobComponentSystem
         (
             (int entityInQueryIndex, in ObstacleSpawner spawn, in LocalToWorld center) =>
             {
+                // Using Random in a Job
+                // Calculate a seed per entity. Note that the seed must not be 0.
+                var seed = (uint)((systemVersion + 1) * (entityInQueryIndex + 1) * 0x9F6ABC1); 
+                Random rndPos = new Random(seed);
+
                 int roadWidth = 5;      // TODO: Here should be calculed the 'width' of the road
                 int roadEntities = 10;  // TODO: Here should be accesed the quantity of Entities instantiated (this information is storaged on the RoadSpawner Length)
 
                 Entity spawnedEntity = commandBufferCreate.Instantiate(entityInQueryIndex, spawn.Prefab);
-                Translation translation = new Translation() { Value = rnd.NextInt3(new int3(-5, 0, 0), new int3(5, 0, 0)) + new int3(0, 0, (roadEntities - 1) * roadWidth) };
-
+                int randomRoad = rndPos.NextInt(-1, 1);
+                Translation translation = new Translation() { Value = new int3(randomRoad * 5, 0, 0) + new int3(0, 0, (roadEntities - 1) * roadWidth) };
+                
                 MovementSpeed movementSpeed = new MovementSpeed() { Value = 1 }; // TODO: This value should change according to the game difficulty
 
                 commandBufferCreate.SetComponent(entityInQueryIndex, spawnedEntity, translation);
