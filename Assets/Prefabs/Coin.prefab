@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2840139634156452038}
   - component: {fileID: 2840139634157451782}
   m_Layer: 0
-  m_Name: SM_Icon_Coin_02
+  m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
