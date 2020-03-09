@@ -34,9 +34,11 @@ public class ObstaclesSpawnerSystem : JobComponentSystem
             return inputDeps;
         }
         else
-            m_timeToInstance = rnd.NextFloat(5, 10); // Instantiation rate
+            m_timeToInstance = rnd.NextFloat(10, 15); // Instantiation rate
 
         EntityCommandBuffer.Concurrent commandBufferCreate = commandBufferSystem.CreateCommandBuffer().ToConcurrent();
+
+        double elapsedTime = Time.ElapsedTime * 10000;
 
         JobHandle spawnJobHandle = Entities.ForEach
         (
@@ -44,20 +46,20 @@ public class ObstaclesSpawnerSystem : JobComponentSystem
             {
                 // Using Random in a Job
                 // Calculate a seed per entity. Note that the seed must not be 0.
-                var seed = (uint)((systemVersion + 1) * (entityInQueryIndex + 1) * 0x9F6ABC1); 
+                var seed = (uint)((systemVersion + 1) * (entityInQueryIndex + 1) * 0x9F6ABC1 ); 
                 Random rndPos = new Random(seed);
 
                 int roadWidth = 5;      // TODO: Here should be calculed the 'width' of the road
                 int roadEntities = 10;  // TODO: Here should be accesed the quantity of Entities instantiated (this information is storaged on the RoadSpawner Length)
 
                 Entity spawnedEntity = commandBufferCreate.Instantiate(entityInQueryIndex, spawn.Prefab);
-                int randomRoad = rndPos.NextInt(-1, 1);
+                int randomRoad = rndPos.NextInt(-1, 2);
                 Translation translation = new Translation() { Value = new int3(randomRoad * 5, 0, 0) + new int3(0, 0, (roadEntities - 1) * roadWidth) };
                 
-                MovementSpeed movementSpeed = new MovementSpeed() { Value = 1 }; // TODO: This value should change according to the game difficulty
+                //MovementSpeed movementSpeed = new MovementSpeed() { Value = 1 }; // TODO: This value should change according to the game difficulty
 
                 commandBufferCreate.SetComponent(entityInQueryIndex, spawnedEntity, translation);
-                commandBufferCreate.SetComponent(entityInQueryIndex, spawnedEntity, movementSpeed);
+                //commandBufferCreate.SetComponent(entityInQueryIndex, spawnedEntity, movementSpeed);
             }
         )
         .WithName("ObstaclesSpawnerSystem")
